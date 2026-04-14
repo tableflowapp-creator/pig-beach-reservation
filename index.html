@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Réservation Pig Beach</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #1b1b1b;
+      padding: 24px;
+      border-radius: 16px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #2ecc71;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .info {
+      margin-top: 20px;
+      padding: 12px;
+      background: #2a2a2a;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Réservation Pig Beach</h1>
+
+    <form>
+      <label>Nom</label>
+      <input type="text" name="nom" required>
+
+      <label>Téléphone</label>
+      <input type="tel" name="telephone" required>
+
+      <label>Date</label>
+      <input type="date" name="date" id="date" required>
+
+      <label>Service</label>
+      <select name="service" required>
+        <option value="midi">Midi</option>
+        <option value="soir">Soir</option>
+      </select>
+
+      <label>Nombre de personnes</label>
+      <input type="number" name="personnes" min="1" max="40" required>
+
+      <div class="info" id="soiree">Soirée : à définir selon le jour</div>
+
+      <button type="submit">Envoyer la réservation</button>
+    </form>
+  </div>
+
+  <script>
+    const dateInput = document.getElementById("date");
+    const soiree = document.getElementById("soiree");
+
+    dateInput.addEventListener("change", () => {
+      const value = dateInput.value;
+      if (!value) return;
+
+      const d = new Date(value);
+      const day = d.getDay();
+
+      let texte = "Soirée classique";
+
+      if (day === 2) texte = "Mardi soir : côte de bœuf à volonté";
+      if (day === 3) texte = "Mercredi soir : chicken à volonté";
+      if (day === 4) texte = "Jeudi soir : ribs à volonté";
+
+      soiree.textContent = "Soirée : " + texte;
+    });
+  </script>
+</body>
+</html>
